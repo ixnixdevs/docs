@@ -1,5 +1,3 @@
----
-
 # 🐦 Wings Installation (Pterodactyl Daemon) – Debian
 
 ## 📦 Voraussetzungen
