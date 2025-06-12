@@ -10,13 +10,13 @@ Diese Anleitung richtet sich an Systemadministratoren, die das Pterodactyl Panel
 - ✅ Vorbereitung des Systems für den Panel-Start
 
 ---
-
+```
 ⚙️ System vorbereiten
 
 ```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y curl wget gnupg2 ca-certificates lsb-release software-properties-common apt-transport-https unzip tar git
-````
+```
 
 ---
 
