@@ -1,7 +1,3 @@
----
-
-### 📄 `README.md` — Pterodactyl Panel Installation für **Debian 12**
-
 ````markdown
 # 🧩 Pterodactyl Panel Installation auf Debian 12 (Bookworm)
 
