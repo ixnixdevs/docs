@@ -1,5 +1,3 @@
----
-
 ### 📄 `README.md` – Pterodactyl Installation für **Debian 12 (Bookworm)**
 
 ````markdown
