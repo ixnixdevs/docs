@@ -1,5 +1,5 @@
-````markdown
-🧩 Pterodactyl Panel Installation auf Debian 12 (Bookworm)
+
+### 🧩 Pterodactyl Panel Installation auf Debian 12 (Bookworm)
 
 Diese Anleitung richtet sich an Systemadministratoren, die das Pterodactyl Panel auf einem frischen **Debian 12 Server** installieren möchten. Die Anleitung beinhaltet:
 
@@ -10,7 +10,6 @@ Diese Anleitung richtet sich an Systemadministratoren, die das Pterodactyl Panel
 - ✅ Vorbereitung des Systems für den Panel-Start
 
 ---
-````
 ⚙️ System vorbereiten
 
 ```bash
