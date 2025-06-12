@@ -1,6 +1,3 @@
-### 📄 `README.md` – NGINX-Konfiguration für Pterodactyl unter Debian 12
-
-````markdown
 # 🌐 NGINX Konfiguration für Pterodactyl Panel (Debian 12)
 
 Diese Anleitung beschreibt die **richtige Einrichtung von NGINX** als Webserver für das Pterodactyl Panel unter **Debian 12 (Bookworm)**, inklusive **automatischer Weiterleitung auf HTTPS** und **SSL-Zertifikaten via Let's Encrypt**.
@@ -11,7 +8,7 @@ Diese Anleitung beschreibt die **richtige Einrichtung von NGINX** als Webserver 
 
 ```bash
 sudo rm /etc/nginx/sites-enabled/default
-````
+```
 
 ---
 
