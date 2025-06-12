@@ -1,55 +1,57 @@
-
-### 🧩 Pterodactyl Panel Installation auf Debian 12 (Bookworm)
-
-Diese Anleitung richtet sich an Systemadministratoren, die das Pterodactyl Panel auf einem frischen **Debian 12 Server** installieren möchten. Die Anleitung beinhaltet:
-
-- ✅ Alle notwendigen Abhängigkeiten
-- ✅ PHP 8.3 über das Sury-Repository
-- ✅ Redis, MariaDB und NGINX
-- ✅ Composer (v2)
-- ✅ Vorbereitung des Systems für den Panel-Start
-
 ---
-⚙️ System vorbereiten
 
-```bash
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y curl wget gnupg2 ca-certificates lsb-release software-properties-common apt-transport-https unzip tar git
-```
+### 📄 `README.md` – Pterodactyl Installation für **Debian 12 (Bookworm)**
+
+````markdown
+# 🧩 Pterodactyl Panel Installation auf Debian 12 (Bookworm)
+
+Diese Anleitung beschreibt die vollständige Installation des Pterodactyl Panels auf einem frischen Debian 12 Server.
 
 ---
 
-## 📦 PHP 8.3 & Extensions installieren
+## 🛠️ System vorbereiten
 
 ```bash
-# PHP Sury Repository hinzufügen
-sudo wget -qO /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+sudo apt update
+sudo apt install -y curl ca-certificates apt-transport-https lsb-release gnupg unzip git software-properties-common
+````
+
+---
+
+## 🐘 PHP 8.3 installieren (via Sury Repository)
+
+Debian 12 nutzt das **Sury** Repository für aktuelle PHP-Versionen:
+
+```bash
+# Sury PHP Repository hinzufügen
 echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+curl -fsSL https://packages.sury.org/php/apt.gpg | sudo gpg --dearmor -o /usr/share/keyrings/sury.gpg
+echo 'deb [signed-by=/usr/share/keyrings/sury.gpg] https://packages.sury.org/php/ bookworm main' | sudo tee /etc/apt/sources.list.d/php.list
 
-# Paketquellen aktualisieren
+# Repositories aktualisieren
 sudo apt update
 
-# PHP und Extensions installieren
-sudo apt install -y php8.3 php8.3-{cli,fpm,common,openssl,gd,mysql,mbstring,tokenizer,bcmath,xml,curl,zip}
+# PHP 8.3 + Extensions installieren
+sudo apt install -y php8.3 php8.3-{cli,common,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip}
 ```
 
 ---
 
-## 🛢️ MariaDB installieren (MySQL Alternative)
+## 🐬 MariaDB (MySQL-kompatibel) installieren
 
 ```bash
+curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash
+sudo apt update
 sudo apt install -y mariadb-server
 ```
 
 ---
 
-## 🧠 Redis installieren
+## 🚀 Redis installieren
 
 ```bash
-# Redis GPG Key hinzufügen
+# Redis GPG Key und Repo hinzufügen
 curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
-
-# Redis Repo hinzufügen
 echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
 
 # Redis installieren
@@ -59,10 +61,10 @@ sudo apt install -y redis-server
 
 ---
 
-## 🌐 Webserver installieren (NGINX Beispiel)
+## 🌐 NGINX & Tools installieren
 
 ```bash
-sudo apt install -y nginx
+sudo apt install -y nginx tar unzip git
 ```
 
 ---
@@ -93,7 +95,7 @@ chmod -R 755 storage/* bootstrap/cache/
 ```bash
 sudo mysql -u root -p
 
-# Dann in der MySQL/MariaDB-Konsole:
+# In der MariaDB-Konsole:
 CREATE USER 'pterodactyl'@'127.0.0.1' IDENTIFIED BY 'deinStarkesPasswort';
 CREATE DATABASE panel;
 GRANT ALL PRIVILEGES ON panel.* TO 'pterodactyl'@'127.0.0.1' WITH GRANT OPTION;
@@ -102,19 +104,12 @@ EXIT;
 
 ---
 
-## 🛠️ Panel vorbereiten
+## ⚙️ Panel konfigurieren
 
 ```bash
 cp .env.example .env
 COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
 php artisan key:generate --force
-```
-
----
-
-## ⚙️ Panel konfigurieren
-
-```bash
 php artisan p:environment:setup
 php artisan p:environment:database
 php artisan p:environment:mail
@@ -122,17 +117,10 @@ php artisan p:environment:mail
 
 ---
 
-## 🗃️ Datenbank migrieren
+## 🗃️ Migration & Admin-User
 
 ```bash
 php artisan migrate --seed --force
-```
-
----
-
-## 👤 Admin-User erstellen
-
-```bash
 php artisan p:user:make
 ```
 
@@ -151,13 +139,13 @@ chown -R www-data:www-data /var/www/pterodactyl/*
 ```bash
 sudo crontab -e
 
-# Füge folgende Zeile ein:
+# Füge folgendes ein:
 * * * * * php /var/www/pterodactyl/artisan schedule:run >> /dev/null 2>&1
 ```
 
 ---
 
-## 🔄 Queue Worker via systemd
+## 🔄 Queue Worker (systemd-Service)
 
 ```bash
 sudo nano /etc/systemd/system/pteroq.service
@@ -182,7 +170,6 @@ WantedBy=multi-user.target
 ```
 
 ```bash
-# Worker aktivieren
 sudo systemctl daemon-reexec
 sudo systemctl enable --now pteroq.service
 ```
@@ -191,13 +178,12 @@ sudo systemctl enable --now pteroq.service
 
 ## ✅ Fertig!
 
-Das Pterodactyl Panel ist nun installiert und bereit. Rufe nun die Domain oder IP deines Servers im Browser auf, um das Webinterface zu nutzen.
+Das Pterodactyl Panel ist nun vollständig installiert. Rufe jetzt deine Server-IP oder Domain im Browser auf und melde dich mit deinem Admin-Konto an.
 
 ---
 
-## 🔒 Wichtiger Hinweis
+## 🔐 Wichtiger Hinweis
 
-Notiere dir den Inhalt der `.env`-Variable `APP_KEY` – dieser ist sicherheitsrelevant. Ohne diesen Schlüssel sind Backups von verschlüsselten Daten unbrauchbar!
+Deine `.env`-Datei enthält den `APP_KEY`, der für alle verschlüsselten Daten entscheidend ist. Sichere diesen separat – z. B. in einem Passwortmanager.
 
 ---
-```
