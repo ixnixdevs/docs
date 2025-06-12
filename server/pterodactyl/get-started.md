@@ -1,6 +1,3 @@
-### 📄 `README.md` – Pterodactyl Installation für **Debian 12 (Bookworm)**
-
-````markdown
 # 🧩 Pterodactyl Panel Installation auf Debian 12 (Bookworm)
 
 Diese Anleitung beschreibt die vollständige Installation des Pterodactyl Panels auf einem frischen Debian 12 Server.
@@ -12,7 +9,7 @@ Diese Anleitung beschreibt die vollständige Installation des Pterodactyl Panels
 ```bash
 sudo apt update
 sudo apt install -y curl ca-certificates apt-transport-https lsb-release gnupg unzip git software-properties-common
-````
+```
 
 ---
 
