@@ -1,5 +1,3 @@
-Klar! Hier ist eine gut formatierte `README.md`, die beschreibt, wie du **Pterodactyl Panel auf Debian 12 (Bookworm)** installierst – inklusive aller erforderlichen Abhängigkeiten und Debian-spezifischer Anpassungen.
-
 ---
 
 ### 📄 `README.md` — Pterodactyl Panel Installation für **Debian 12**
@@ -207,10 +205,3 @@ Das Pterodactyl Panel ist nun installiert und bereit. Rufe nun die Domain oder I
 Notiere dir den Inhalt der `.env`-Variable `APP_KEY` – dieser ist sicherheitsrelevant. Ohne diesen Schlüssel sind Backups von verschlüsselten Daten unbrauchbar!
 
 ---
-
-```
-
----
-
-Wenn du willst, kann ich dir noch eine Version auf Englisch erstellen oder eine zweite Datei für Wings (den Daemon). Sag einfach Bescheid.
-```
