@@ -1,5 +1,14 @@
+# 🧩 Webserver konfigurieren!
+
+Hier kannst du den Webserver Konfigurieren!
+
+---
 ```bash
-/etc/nginx/sites-available/pterodactyl.conf
+rm /etc/nginx/sites-enabled/default
+```
+
+```bash
+nano /etc/nginx/sites-available/pterodactyl.conf
 ```
 
 ---
