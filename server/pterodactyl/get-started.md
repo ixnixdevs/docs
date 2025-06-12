@@ -10,7 +10,7 @@ Diese Anleitung richtet sich an Systemadministratoren, die das Pterodactyl Panel
 - ✅ Vorbereitung des Systems für den Panel-Start
 
 ---
-```
+````
 ⚙️ System vorbereiten
 
 ```bash
