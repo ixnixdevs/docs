@@ -205,3 +205,4 @@ Das Pterodactyl Panel ist nun installiert und bereit. Rufe nun die Domain oder I
 Notiere dir den Inhalt der `.env`-Variable `APP_KEY` – dieser ist sicherheitsrelevant. Ohne diesen Schlüssel sind Backups von verschlüsselten Daten unbrauchbar!
 
 ---
+```
